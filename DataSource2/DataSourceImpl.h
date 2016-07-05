@@ -17,6 +17,13 @@
 @property (nonatomic, assign) BOOL animated;
 @property (nonatomic, assign) BOOL editable;
 
+/**
+ *	Convenience Initializer, automatically connects TableView to DataSource
+ *
+ *	@param tableView	TableView
+ *
+ *	@return DataSource
+ */
 - (instancetype)initWithTableView:(UITableView *)tableView;
 
 @end
