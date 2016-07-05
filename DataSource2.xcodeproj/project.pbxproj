@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63BD04471D2C219A001ACE12 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD04461D2C219A001ACE12 /* Company.m */; };
+		63BD044B1D2C21BA001ACE12 /* CompanyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD04491D2C21BA001ACE12 /* CompanyTableViewCell.m */; };
+		63BD044C1D2C21BA001ACE12 /* CompanyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BD044A1D2C21BA001ACE12 /* CompanyTableViewCell.xib */; };
+		63BD044F1D2C21D1001ACE12 /* CompanyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD044E1D2C21D1001ACE12 /* CompanyViewModel.m */; };
 		63BEE7D21D2BCBAB00B4D737 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7D11D2BCBAB00B4D737 /* main.m */; };
 		63BEE7D51D2BCBAB00B4D737 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7D41D2BCBAB00B4D737 /* AppDelegate.m */; };
 		63BEE7D81D2BCBAB00B4D737 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7D71D2BCBAB00B4D737 /* ViewController.m */; };
@@ -21,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63BD04451D2C219A001ACE12 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		63BD04461D2C219A001ACE12 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		63BD04481D2C21BA001ACE12 /* CompanyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyTableViewCell.h; sourceTree = "<group>"; };
+		63BD04491D2C21BA001ACE12 /* CompanyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyTableViewCell.m; sourceTree = "<group>"; };
+		63BD044A1D2C21BA001ACE12 /* CompanyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompanyTableViewCell.xib; sourceTree = "<group>"; };
+		63BD044D1D2C21D1001ACE12 /* CompanyViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyViewModel.h; sourceTree = "<group>"; };
+		63BD044E1D2C21D1001ACE12 /* CompanyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyViewModel.m; sourceTree = "<group>"; };
 		63BEE7CD1D2BCBAB00B4D737 /* DataSource2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSource2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BEE7D11D2BCBAB00B4D737 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63BEE7D31D2BCBAB00B4D737 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -129,6 +140,10 @@
 				63BEE7F71D2BE13A00B4D737 /* Person.m */,
 				63BEE7FD1D2BE21B00B4D737 /* Person+DataSource.h */,
 				63BEE7FE1D2BE21B00B4D737 /* Person+DataSource.m */,
+				63BD04451D2C219A001ACE12 /* Company.h */,
+				63BD04461D2C219A001ACE12 /* Company.m */,
+				63BD044D1D2C21D1001ACE12 /* CompanyViewModel.h */,
+				63BD044E1D2C21D1001ACE12 /* CompanyViewModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -138,6 +153,9 @@
 			children = (
 				63BEE7FA1D2BE1EA00B4D737 /* PersonTableViewCell.h */,
 				63BEE7FB1D2BE1EA00B4D737 /* PersonTableViewCell.m */,
+				63BD04481D2C21BA001ACE12 /* CompanyTableViewCell.h */,
+				63BD04491D2C21BA001ACE12 /* CompanyTableViewCell.m */,
+				63BD044A1D2C21BA001ACE12 /* CompanyTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -202,6 +220,7 @@
 				63BEE7E01D2BCBAB00B4D737 /* LaunchScreen.storyboard in Resources */,
 				63BEE7DD1D2BCBAB00B4D737 /* Assets.xcassets in Resources */,
 				63BEE7DB1D2BCBAB00B4D737 /* Main.storyboard in Resources */,
+				63BD044C1D2C21BA001ACE12 /* CompanyTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,10 +234,13 @@
 				63BEE7F81D2BE13A00B4D737 /* Person.m in Sources */,
 				63BEE7D81D2BCBAB00B4D737 /* ViewController.m in Sources */,
 				63BEE7D51D2BCBAB00B4D737 /* AppDelegate.m in Sources */,
+				63BD044B1D2C21BA001ACE12 /* CompanyTableViewCell.m in Sources */,
 				63BEE7FF1D2BE21B00B4D737 /* Person+DataSource.m in Sources */,
 				63BEE7FC1D2BE1EA00B4D737 /* PersonTableViewCell.m in Sources */,
 				63BEE7F41D2BD55400B4D737 /* DataSourceImpl.m in Sources */,
 				63BEE7EC1D2BCD7B00B4D737 /* DataSourceDefaultSection.m in Sources */,
+				63BD044F1D2C21D1001ACE12 /* CompanyViewModel.m in Sources */,
+				63BD04471D2C219A001ACE12 /* Company.m in Sources */,
 				63BEE7D21D2BCBAB00B4D737 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

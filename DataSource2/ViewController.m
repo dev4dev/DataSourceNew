@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DataSourceImpl.h"
 #import "Person+DataSource.h"
+#import "CompanyViewModel.h"
 
 @interface ViewController () <UITableViewDelegate>
 
@@ -31,16 +32,17 @@
 	self.dataSource.animated = YES;
 	self.dataSource.editable = YES;
 	[self.dataSource registerDataClass:[Person class]];
+	[self.dataSource registerDataClass:[CompanyViewModel class]];
 
 	[self.dataSource addSection:[self.dataSource createSection:^(id<DataSourceSection> section) {
 		section.footerTitle = @"end of default section";
 	}]];
 
-	[self.dataSource addObject:[self createPerson] toSection:0];
+	[self addNewObject];
 
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self.dataSource deleteAllData];
-	});
+//	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//		[self.dataSource deleteAllData];
+//	});
 }
 
 - (Person *)createPerson
@@ -52,9 +54,25 @@
 	return p;
 }
 
+- (CompanyViewModel *)createCompany
+{
+	return [CompanyViewModel createWithName:@"Apple" address:@"Mars"];
+}
+
+- (void)addNewObject
+{
+	id<DataSourceCellConfigurable> obj;
+	if (arc4random_uniform(1000) % 2 == 0) {
+		obj = [self createPerson];
+	} else {
+		obj = [self createCompany];
+	}
+	[self.dataSource addObject:obj toSection:self.dataSource.sectionsCount - 1];
+}
+
 - (IBAction)onAddTap:(id)sender
 {
-	[self.dataSource addObject:[self createPerson] toSection:self.dataSource.sectionsCount - 1];
+	[self addNewObject];
 }
 
 - (IBAction)onAddSectionTap:(id)sender
