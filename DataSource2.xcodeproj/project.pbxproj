@@ -13,6 +13,11 @@
 		63BEE7DB1D2BCBAB00B4D737 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BEE7D91D2BCBAB00B4D737 /* Main.storyboard */; };
 		63BEE7DD1D2BCBAB00B4D737 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63BEE7DC1D2BCBAB00B4D737 /* Assets.xcassets */; };
 		63BEE7E01D2BCBAB00B4D737 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BEE7DE1D2BCBAB00B4D737 /* LaunchScreen.storyboard */; };
+		63BEE7EC1D2BCD7B00B4D737 /* DataSourceDefaultSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7EB1D2BCD7B00B4D737 /* DataSourceDefaultSection.m */; };
+		63BEE7F41D2BD55400B4D737 /* DataSourceImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7F31D2BD55400B4D737 /* DataSourceImpl.m */; };
+		63BEE7F81D2BE13A00B4D737 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7F71D2BE13A00B4D737 /* Person.m */; };
+		63BEE7FC1D2BE1EA00B4D737 /* PersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7FB1D2BE1EA00B4D737 /* PersonTableViewCell.m */; };
+		63BEE7FF1D2BE21B00B4D737 /* Person+DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BEE7FE1D2BE21B00B4D737 /* Person+DataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,19 @@
 		63BEE7DC1D2BCBAB00B4D737 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63BEE7DF1D2BCBAB00B4D737 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63BEE7E11D2BCBAB00B4D737 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BEE7E81D2BCBC000B4D737 /* DataSourceSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceSection.h; sourceTree = "<group>"; };
+		63BEE7E91D2BCC9400B4D737 /* DataSourceCellConfigurable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceCellConfigurable.h; sourceTree = "<group>"; };
+		63BEE7EA1D2BCD7B00B4D737 /* DataSourceDefaultSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceDefaultSection.h; sourceTree = "<group>"; };
+		63BEE7EB1D2BCD7B00B4D737 /* DataSourceDefaultSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceDefaultSection.m; sourceTree = "<group>"; };
+		63BEE7F11D2BD30000B4D737 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
+		63BEE7F21D2BD55400B4D737 /* DataSourceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceImpl.h; sourceTree = "<group>"; };
+		63BEE7F31D2BD55400B4D737 /* DataSourceImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceImpl.m; sourceTree = "<group>"; };
+		63BEE7F61D2BE13A00B4D737 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		63BEE7F71D2BE13A00B4D737 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		63BEE7FA1D2BE1EA00B4D737 /* PersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonTableViewCell.h; sourceTree = "<group>"; };
+		63BEE7FB1D2BE1EA00B4D737 /* PersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTableViewCell.m; sourceTree = "<group>"; };
+		63BEE7FD1D2BE21B00B4D737 /* Person+DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+DataSource.h"; sourceTree = "<group>"; };
+		63BEE7FE1D2BE21B00B4D737 /* Person+DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+DataSource.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +76,9 @@
 		63BEE7CF1D2BCBAB00B4D737 /* DataSource2 */ = {
 			isa = PBXGroup;
 			children = (
+				63BEE7F91D2BE1E000B4D737 /* Cells */,
+				63BEE7F51D2BE13200B4D737 /* Models */,
+				63BEE7E71D2BCBAF00B4D737 /* DataSource */,
 				63BEE7D31D2BCBAB00B4D737 /* AppDelegate.h */,
 				63BEE7D41D2BCBAB00B4D737 /* AppDelegate.m */,
 				63BEE7D61D2BCBAB00B4D737 /* ViewController.h */,
@@ -77,6 +98,48 @@
 				63BEE7D11D2BCBAB00B4D737 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		63BEE7E71D2BCBAF00B4D737 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				63BEE7ED1D2BD14400B4D737 /* Protocols */,
+				63BEE7EA1D2BCD7B00B4D737 /* DataSourceDefaultSection.h */,
+				63BEE7EB1D2BCD7B00B4D737 /* DataSourceDefaultSection.m */,
+				63BEE7F21D2BD55400B4D737 /* DataSourceImpl.h */,
+				63BEE7F31D2BD55400B4D737 /* DataSourceImpl.m */,
+			);
+			name = DataSource;
+			sourceTree = "<group>";
+		};
+		63BEE7ED1D2BD14400B4D737 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				63BEE7E81D2BCBC000B4D737 /* DataSourceSection.h */,
+				63BEE7E91D2BCC9400B4D737 /* DataSourceCellConfigurable.h */,
+				63BEE7F11D2BD30000B4D737 /* DataSource.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		63BEE7F51D2BE13200B4D737 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63BEE7F61D2BE13A00B4D737 /* Person.h */,
+				63BEE7F71D2BE13A00B4D737 /* Person.m */,
+				63BEE7FD1D2BE21B00B4D737 /* Person+DataSource.h */,
+				63BEE7FE1D2BE21B00B4D737 /* Person+DataSource.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		63BEE7F91D2BE1E000B4D737 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				63BEE7FA1D2BE1EA00B4D737 /* PersonTableViewCell.h */,
+				63BEE7FB1D2BE1EA00B4D737 /* PersonTableViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +212,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BEE7F81D2BE13A00B4D737 /* Person.m in Sources */,
 				63BEE7D81D2BCBAB00B4D737 /* ViewController.m in Sources */,
 				63BEE7D51D2BCBAB00B4D737 /* AppDelegate.m in Sources */,
+				63BEE7FF1D2BE21B00B4D737 /* Person+DataSource.m in Sources */,
+				63BEE7FC1D2BE1EA00B4D737 /* PersonTableViewCell.m in Sources */,
+				63BEE7F41D2BD55400B4D737 /* DataSourceImpl.m in Sources */,
+				63BEE7EC1D2BCD7B00B4D737 /* DataSourceDefaultSection.m in Sources */,
 				63BEE7D21D2BCBAB00B4D737 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +370,7 @@
 				63BEE7E61D2BCBAB00B4D737 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

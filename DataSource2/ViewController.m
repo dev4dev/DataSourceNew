@@ -7,21 +7,60 @@
 //
 
 #import "ViewController.h"
+#import "DataSourceImpl.h"
+#import "Person+DataSource.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) DataSourceImpl *dataSource;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+
+	self.dataSource = [[DataSourceImpl alloc] initWithTableView:self.tableView];
+	self.dataSource.animation = UITableViewRowAnimationFade;
+	self.dataSource.editable = YES;
+	[self.dataSource registerDataClass:[Person class]];
+
+	[self.dataSource addSection:[self.dataSource createSection:^(id<DataSourceSection> section) {
+		section.footerTitle = @"end of default section";
+	}]];
+
+	[self.dataSource addObject:[self createPerson] toSection:0];
 }
 
-- (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
+- (Person *)createPerson
+{
+	Person *p = [Person new];
+	p.name = @"Sponge Bob";
+	p.address = @"bottom of the sea";
+	return p;
+}
+
+- (IBAction)onAddTap:(id)sender
+{
+	[self.dataSource addObject:[self createPerson] toSection:self.dataSource.sectionsCount - 1];
+}
+
+- (IBAction)onAddSectionTap:(id)sender
+{
+	[self.dataSource addSection:[self.dataSource createSection:^(id<DataSourceSection> section) {
+		section.headerTitle = @"Section";
+	}]];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	id object = [self.dataSource objectAtIndexPath:indexPath];
+	NSLog(@"Selected %@", object);
+	[self.dataSource deleteObjectAtIndexPath:indexPath];
 }
 
 @end
