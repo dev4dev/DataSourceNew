@@ -35,6 +35,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HYQ-ax-5Wu">
+                        <barButtonItem key="leftBarButtonItem" title="Move" id="BvS-mu-qTb">
+                            <connections>
+                                <action selector="onMoveTap:" destination="BYZ-38-t0r" id="MBC-Qg-oLc"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="LLU-i6-B0S">
                                 <connections>

@@ -14,6 +14,8 @@
 @protocol DataSourceSectionDelegate <NSObject>
 
 - (NSUInteger)indexOfDataSourceSection:(id<DataSourceSection>)section;
+- (void)dataSourceSection:(id<DataSourceSection>)section didAddObjectAtIndexPath:(NSIndexPath *)indexPath;
+- (void)dataSourceSection:(id<DataSourceSection>)section didDeleteObjectAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -32,5 +34,7 @@
 
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSUInteger)objectsCount;
+
+- (void)silentOperation:(void(^)(id<DataSourceSection> section))block;
 
 @end

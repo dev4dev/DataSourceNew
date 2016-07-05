@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSMutableArray<id<DataSourceSection>> *sections;
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) dispatch_queue_t operationsQueue;
 
 @end
 
@@ -24,6 +25,7 @@
 {
 	if (self = [self init]) {
 		[self connectTableView:tableView];
+		_operationsQueue = dispatch_queue_create("me.antonyuk.dataSource.operations", DISPATCH_QUEUE_SERIAL);
 	}
 
 	return self;
@@ -61,11 +63,8 @@
 		return;
 	}
 
-	[self.tableView beginUpdates];
 	id<DataSourceSection> s = [self sectionAtIndex:section];
-	NSIndexPath *indexPath = [s addObject:object];
-	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:self.animation];
-	[self.tableView endUpdates];
+	[s addObject:object];
 }
 
 - (void)insertObject:(id)object atIndexPath:(NSIndexPath *)indexPath
@@ -74,20 +73,40 @@
 		return;
 	}
 
-	[self.tableView beginUpdates];
 	id<DataSourceSection> s = [self sectionAtIndex:indexPath.section];
-	NSIndexPath *ip = [s insertObject:object atIndex:indexPath.row];
-	[self.tableView insertRowsAtIndexPaths:@[ip] withRowAnimation:self.animation];
-	[self.tableView endUpdates];
+	[s insertObject:object atIndex:indexPath.row];
 }
 
 - (void)deleteObjectAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self.tableView beginUpdates];
 	id<DataSourceSection> s = [self sectionAtIndex:indexPath.section];
-	NSIndexPath *ip = [s deleteObjectAtIndex:indexPath.row];
-	[self.tableView deleteRowsAtIndexPaths:@[ip] withRowAnimation:self.animation];
-	[self.tableView endUpdates];
+	[s deleteObjectAtIndex:indexPath.row];
+}
+
+- (void)moveObjectFromIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)toIndexPath animated:(BOOL)animated
+{
+	id object = [self objectAtIndexPath:sourceIndexPath];
+
+	if (animated) {
+		[self.tableView beginUpdates];
+	}
+
+	id<DataSourceSection> ss = [self sectionAtIndex:toIndexPath.section];
+	[ss silentOperation:^(id<DataSourceSection> section) {
+		[section insertObject:object atIndex:toIndexPath.row];
+	}];
+
+	id<DataSourceSection> s = [self sectionAtIndex:sourceIndexPath.section];
+	[s silentOperation:^(id<DataSourceSection> section) {
+		[section deleteObjectAtIndex:sourceIndexPath.row];
+	}];
+
+	if (animated) {
+		[self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:toIndexPath];
+		[self.tableView endUpdates];
+	} else {
+		[self.tableView reloadData];
+	}
 }
 
 - (id<DataSourceCellConfigurable>)objectAtIndexPath:(NSIndexPath *)indexPath
@@ -102,12 +121,23 @@
 		return;
 	}
 
-	[self.tableView beginUpdates];
-	NSUInteger row = self.sections.count;
-	[section setDelegate:self];
-	[self.sections addObject:section];
-	[self.tableView insertSections:[NSIndexSet indexSetWithIndex:row] withRowAnimation:self.animation];
-	[self.tableView endUpdates];
+	if (self.animated) {
+		[self.tableView beginUpdates];
+	}
+
+	__block NSUInteger row;
+	dispatch_barrier_sync(self.operationsQueue, ^{
+		row = self.sections.count;
+		[section setDelegate:self];
+		[self.sections addObject:section];
+	});
+
+	if (self.animated) {
+		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:row] withRowAnimation:self.animation];
+		[self.tableView endUpdates];
+	} else {
+		[self.tableView reloadData];
+	}
 }
 
 - (id<DataSourceSection>)createSection:(DataSourceSectionSetupBlock)block
@@ -126,6 +156,37 @@
 	}
 
 	return self.sections[index];
+}
+
+- (void)deleteSectionAtIndex:(NSUInteger)index
+{
+	if (index >= self.sections.count) {
+		return;
+	}
+
+	if (self.animated) {
+		[self.tableView beginUpdates];
+	}
+
+	dispatch_barrier_sync(self.operationsQueue, ^{
+		[self.sections removeObjectAtIndex:index];
+	});
+
+	if (self.animated) {
+		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:self.animation];
+		[self.tableView endUpdates];
+	} else {
+		[self.tableView reloadData];
+	}
+}
+
+- (void)deleteAllData
+{
+	[self.tableView setEditing:NO animated:NO];
+	dispatch_barrier_sync(self.operationsQueue, ^{
+		[self.sections removeAllObjects];
+		[self.tableView reloadData];
+	});
 }
 
 - (void)connectTableView:(UITableView *)tableView
@@ -193,6 +254,38 @@
 - (NSUInteger)indexOfDataSourceSection:(id<DataSourceSection>)section
 {
 	return [self.sections indexOfObject:section];
+}
+
+- (void)dataSourceSection:(id<DataSourceSection>)section didAddObjectAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (self.animated) {
+		[self.tableView beginUpdates];
+		[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:self.animation];
+		[self.tableView endUpdates];
+	} else {
+		[self.tableView reloadData];
+	}
+}
+
+- (void)dataSourceSection:(id<DataSourceSection>)section didDeleteObjectAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (self.animated) {
+		[self.tableView beginUpdates];
+		[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:self.animation];
+		[self.tableView endUpdates];
+	} else {
+		[self.tableView reloadData];
+	}
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+	[self moveObjectFromIndexPath:sourceIndexPath toIndexPath:destinationIndexPath animated:NO];
 }
 
 @end

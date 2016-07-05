@@ -14,6 +14,7 @@
 @interface DataSourceImpl : NSObject <DataSource>
 
 @property (nonatomic, assign) UITableViewRowAnimation animation;
+@property (nonatomic, assign) BOOL animated;
 @property (nonatomic, assign) BOOL editable;
 
 - (instancetype)initWithTableView:(UITableView *)tableView;
