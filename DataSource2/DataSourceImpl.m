@@ -91,14 +91,14 @@
 		[self.tableView beginUpdates];
 	}
 
-	id<DataSourceSection> ss = [self sectionAtIndex:toIndexPath.section];
-	[ss silentOperation:^(id<DataSourceSection> section) {
-		[section insertObject:object atIndex:toIndexPath.row];
-	}];
-
 	id<DataSourceSection> s = [self sectionAtIndex:sourceIndexPath.section];
 	[s silentOperation:^(id<DataSourceSection> section) {
 		[section deleteObjectAtIndex:sourceIndexPath.row];
+	}];
+
+	id<DataSourceSection> ss = [self sectionAtIndex:toIndexPath.section];
+	[ss silentOperation:^(id<DataSourceSection> section) {
+		[section insertObject:object atIndex:toIndexPath.row];
 	}];
 
 	if (animated) {
